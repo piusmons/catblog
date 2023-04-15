@@ -1,0 +1,30 @@
+
+
+.header {
+    margin-top: 60px;
+}
+
+
+.headerTitles{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.HeaderTitlesm {
+    position: absolute;
+    top: 15%;
+    font-size: 20px;
+}
+
+
+.HeaderTitlelg {
+    position: absolute;
+    top: 20%;
+    font-size: 100px;
+}
+
+
+.headerImg {
+    height: 75vh;
+}
