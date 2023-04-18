@@ -12,29 +12,49 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { useState, useEffect, createContext } from "react";
+import { auth } from "./firebase";
 
 
-function App() {
-  const user = false;
+
+function App()  {
+  const [authUser, setAuthUser] = useState(null);
+
+    
+    useEffect(() => {
+      const listen = onAuthStateChanged(auth, (user) => {
+        
+        if (user) {
+          setAuthUser(user);
+        } else {
+          setAuthUser(null);
+        }
+      });
+    }, [authUser]);
+
   return (
     <Router>
-      <TopBar/>
+    
+      <TopBar authUserData={authUser, setAuthUser}/>
+     
       <Routes>
         <Route exact path="/" element={<Home/>}> 
         </Route>
-        <Route exact path="/register" element={user ? <Home/> : <Register/>}> 
+        <Route exact path="/register" element={authUser ? <Home/> : <Register/>}> 
         </Route>
-        <Route exact path="/login" element={user ? <Home/> : <Login/>}> 
+        <Route exact path="/login" element={authUser ? <Home/> : <Login/>}> 
         </Route>
-        <Route exact path="/write" element={user ? <Write/> : <Register/>}> 
+        <Route exact path="/write" element={authUser ? <Write/> : <Register/>}> 
         </Route>
-        <Route exact path="/settings" element={user ? <Setting/> : <Register/>}> 
+        <Route exact path="/settings" element={authUser ? <Setting/> : <Register/>}> 
         </Route>
         <Route exact path="/post/:postId" element={<Single/>}> 
         </Route>
       </Routes>
-      
+    
     </Router>
+    
 
     
   );

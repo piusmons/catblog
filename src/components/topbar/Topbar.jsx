@@ -1,9 +1,36 @@
 import "./topbar.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { AuthContext } from "../../App";
+import { auth } from "../../firebase";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+
+
 
 export default function TopBar() {
-    const user = true;
+    const [authUser, setAuthUser] = useState(null);
+    
+    
+    useEffect(() => {
+      const listen = onAuthStateChanged(auth, (user) => {
+        
+        if (user) {
+          setAuthUser(user);
+        } else {
+          setAuthUser(null);
+        }
+      });
+    }, [authUser]);
 
+    
+  
+   const navigate = useNavigate();
+
+    const handleSignOut = () => {
+        signOut(auth)
+        navigate("/login") 
+
+    }
 
     return (
         
@@ -18,19 +45,20 @@ export default function TopBar() {
                     <li className="topListItem">
                         <Link to="/">HOME</Link>
                     </li>
-                    <li className="topListItem">
-                        <Link to="/login">LOGIN</Link>
-                    </li>
+                
                     <li className="topListItem">
                         <Link to="/write">WRITE</Link>
                     </li>
                    
-                    <li className="topListItem">{user && "LOGOUT"}</li>
+                    <li 
+                    className="topListItem"
+                    onClick={handleSignOut}
+                    >{ authUser && "LOGOUT"}</li>
                 </ul>
             </div>
             <div className="top-right">
                 {
-                    user ? (
+                    authUser ? (
                         <img className="topImg"
                         src="https://i.imgur.com/vBEVee2.jpeg">
                         </img>
