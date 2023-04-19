@@ -1,27 +1,59 @@
 import "./post.css"
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase";
+import { Link } from "react-router-dom";
+import { db } from "../../firebase";
+import { deleteDoc, doc } from "firebase/firestore";
 
-export default function Post() {
+
+
+
+export default function Post({ title, info, id }) {
+    const [authUser, setAuthUser] = useState(null);
     
-
+    const handleDelete = async (e) => {
+        const delPostRef = doc(db, 'post', id)
+        
+        try {
+            await deleteDoc(delPostRef)
+            console.log(id)
+        } catch (err) {
+            alert(err)
+        }
+    }
+    
+    useEffect(() => {
+      const listen = onAuthStateChanged(auth, (user) => {
+        
+        if (user) {
+          setAuthUser(user);
+        } else {
+          setAuthUser(null);
+        }
+      });
+    }, [authUser]);
+    
     return(
-        <div className="post">
+        <div className="post" >
             <img
             className="postImg"
                 src="https://i.imgur.com/5c1Z0Mi.jpeg"
             />
             <div className="postInfo">
-                <div className="postCats">
-                    <span className="postCat">music</span>
-                    <span className="postCat">life</span>
-                </div>
+                
                 <span className="postTitle">
-                    Lorem, ipsum dolor sit amet consectetur adi
+                     
+                    <Link className="link" to={`/post/${id}`}>{title}</Link>
                 </span>
                 <hr />
                 <span className="postDate">1 hour ago</span>
             </div>
-            <p className="postDesc">Lorem ipsum dolor sit amet consectetur olor sit amet consectetur aolor sit amet consectetur aolor sit amet consectetur aolor sit amet consectetur aolor sit amet consectetur aolor sit amet consectetur a adipisicing elit. Natus aliquid quo voluptates excepturi a aut quia molestiae unde laudantium perspiciatis officiis nulla aspernatur et, ipsum est dolores fugit maiores! Corporis.</p>
+            <p className="postDesc">{info}</p>
+            {
+                authUser ? (<button onClick={e => handleDelete()}></button>) : (null)
+            }
+
         </div>
 
     )
