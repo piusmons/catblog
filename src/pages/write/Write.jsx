@@ -14,7 +14,7 @@ export default function Write() {
     const collectionRef = collection(db, "post");
 
     const createPost = async () => {
-        console.log('clicked')
+        
 
         try {
             await addDoc(collection(db, "post"), {title, info, });

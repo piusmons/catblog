@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Link } from "react-router-dom";
-import { db } from "../../firebase";
-import { deleteDoc, doc } from "firebase/firestore";
+
 
 
 
@@ -12,16 +11,7 @@ import { deleteDoc, doc } from "firebase/firestore";
 export default function Post({ title, info, id }) {
     const [authUser, setAuthUser] = useState(null);
     
-    const handleDelete = async (e) => {
-        const delPostRef = doc(db, 'post', id)
-        
-        try {
-            await deleteDoc(delPostRef)
-            console.log(id)
-        } catch (err) {
-            alert(err)
-        }
-    }
+   
     
     useEffect(() => {
       const listen = onAuthStateChanged(auth, (user) => {
@@ -50,9 +40,7 @@ export default function Post({ title, info, id }) {
                 <span className="postDate">1 hour ago</span>
             </div>
             <p className="postDesc">{info}</p>
-            {
-                authUser ? (<button onClick={e => handleDelete()}></button>) : (null)
-            }
+            
 
         </div>
 

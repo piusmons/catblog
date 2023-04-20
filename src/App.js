@@ -36,7 +36,7 @@ function App()  {
   return (
     <Router>
     
-      <TopBar authUserData={authUser, setAuthUser}/>
+      <TopBar />
      
       <Routes>
         <Route exact path="/" element={<Home/>}> 
