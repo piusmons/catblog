@@ -56,5 +56,7 @@
 }
 
 .link {
+    background-color: inherit;
+    text-decoration: none;
     
 }

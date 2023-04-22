@@ -22,7 +22,7 @@ export default function Post({ title, info, id }) {
           setAuthUser(null);
         }
       });
-    }, [authUser]);
+    }, []);
     
     return(
         <div className="post" >

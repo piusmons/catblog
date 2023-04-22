@@ -5,6 +5,8 @@ import { useState, useEffect } from "react"
 import { doc, getDoc, deleteDoc } from "firebase/firestore"
 import { onAuthStateChanged} from "firebase/auth"
 import { auth } from "../../firebase";
+import { Navigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 export default function SinglePost() {
@@ -27,12 +29,15 @@ export default function SinglePost() {
         
         try {
             await deleteDoc(delPostRef)
+            Navigate("/home")
             console.log(postId.postId)
         } catch (err) {
             alert(err)
         }
     }
     
+    
+
     useEffect(() => {
         const listen = onAuthStateChanged(auth, (user) => {
           
@@ -42,7 +47,7 @@ export default function SinglePost() {
             setAuthUser(null);
           }
         });
-      }, [authUser]);
+      }, []);
     
             
     
@@ -56,7 +61,8 @@ export default function SinglePost() {
                 <div className="singlePostEdit">
                 {
                  authUser ?   (<>
-                    <i className="singlePostIcon1 far fa-edit"></i>
+                    
+                    <Link to={`/update/${postId.postId}`}><i className="singlePostIcon1 far fa-edit"/></Link>
                     <i className="singlePostIcon2 far fa-trash-alt" onClick={handleDelete}></i>
                     </>) : (null)
                 }

@@ -5,6 +5,7 @@ import Write from "./pages/write/Write";
 import Setting from "./pages/settings/Setting";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register"
+import Update from "./pages/update/Update"
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -31,7 +32,7 @@ function App()  {
           setAuthUser(null);
         }
       });
-    }, [authUser]);
+    }, []);
 
   return (
     <Router>
@@ -50,6 +51,8 @@ function App()  {
         <Route exact path="/settings" element={authUser ? <Setting/> : <Register/>}> 
         </Route>
         <Route exact path="/post/:postId" element={<Single/>}> 
+        </Route>
+        <Route exact path="/update/:postId" element={<Update/>}> 
         </Route>
       </Routes>
     
