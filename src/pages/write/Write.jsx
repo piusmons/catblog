@@ -13,13 +13,15 @@ export default function Write() {
    
     
 
-    const createPost = async () => {
-
+    const createPost = async (e) => {
+        e.preventDefault()
         
 
         try {
             await addDoc(collection(db, "post"), {title, info, });
-            console.log("document submitted")
+           
+            alert("document submitted")
+
         } catch(e) {
             console.error('error adding doc')
         }

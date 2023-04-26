@@ -29,10 +29,10 @@ export default function SinglePost() {
         
         try {
             await deleteDoc(delPostRef)
-            Navigate("/home")
+            Navigate("/")
             console.log(postId.postId)
         } catch (err) {
-            alert(err)
+            console.log(err)
         }
     }
     

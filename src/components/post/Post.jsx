@@ -9,32 +9,16 @@ import { Link } from "react-router-dom";
 
 
 export default function Post({ title, info, id }) {
-    const [authUser, setAuthUser] = useState(null);
-    
    
-    
-    useEffect(() => {
-      const listen = onAuthStateChanged(auth, (user) => {
-        
-        if (user) {
-          setAuthUser(user);
-        } else {
-          setAuthUser(null);
-        }
-      });
-    }, []);
     
     return(
         <div className="post" >
-            <img
-            className="postImg"
-                src="https://i.imgur.com/5c1Z0Mi.jpeg"
-            />
+            
             <div className="postInfo">
                 
                 <span className="postTitle">
                      
-                    <Link className="link" to={`/post/${id}`}>{title}</Link>
+                    <Link className="link-title" to={`/post/${id}`}>{title}</Link>
                 </span>
                 <hr />
                 <span className="postDate">1 hour ago</span>

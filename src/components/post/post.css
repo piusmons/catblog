@@ -33,6 +33,7 @@
     font-weight: 700;
     margin-top: 15px;
     cursor: pointer;
+    
 }
 
 .postDate {
@@ -52,4 +53,13 @@
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
+}
+
+.delButton {
+
+    
+}
+
+.link-title {
+    color: gold;
 }
