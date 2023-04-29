@@ -61,3 +61,38 @@
     background-color: rgb(60, 217, 136);
 }
 
+
+@media only screen and (max-width: 600px) {
+    .write {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        
+        align-items: center;
+    }
+
+    .writeImg {
+        margin: 0 0 0 0;
+    }
+
+    .writeForm {
+        flex-direction: column;
+        display: flex;
+
+    }
+
+    .writeSubmit {
+        margin-top: 10px;
+    }
+
+    .writeInput {
+        margin-top: 50px;
+    }
+    .writeFormGroup {
+        display: flex;
+        flex-direction: column;
+        margin: 0 0 100px 0;
+        
+
+    }
+  }
